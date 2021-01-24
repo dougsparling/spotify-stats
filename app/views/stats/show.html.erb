@@ -8,7 +8,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @by_year.each do |year, count| %>
+		<% @year_labels.zip(@year_values).each do |year, count| %>
 			<tr>
 				<td><%= year %></td>
 				<td><%= count %></td>

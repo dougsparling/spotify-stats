@@ -1,2 +1,13 @@
-<h1>hey</h1>
-<%= button_to 'Sign in with Spotify', '/auth/spotify', method: :post %>
+<div style="width: 600px; margin: auto; text-align: center">
+	<h1>Stats on Saved Tracks for Spotify!</h1>
+
+	<p>Linking below will direct you to sign into your Spotify account.</p>
+
+	<p>We request only the minimum permissions needed to query your saved tracks and save nothing about your account afterward.</p>
+	
+	<div>
+		<%= link_to image_tag("/spotify.png", size: "75"), '/auth/spotify', method: :post %>
+		<%= link_to 'Sign in with Spotify', '/auth/spotify', method: :post %>
+	</div>
+	
+</div>
