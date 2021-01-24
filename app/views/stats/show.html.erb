@@ -1,18 +1,9 @@
-<h1>Stats for <%= @user.uri %></h1>
+<h1>Stats for <%= @user.display_name %></h1>
 
-<table>
-	<thead>
-		<tr>
-			<th>Year</th>
-			<th>Count</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @year_labels.zip(@year_values).each do |year, count| %>
-			<tr>
-				<td><%= year %></td>
-				<td><%= count %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<h3>My Saved Songs</h3>
+<%= bar_chart @year_labels.zip(@year_values),
+	id: "yearly-chart",
+	width: "800px", height: "#{20 * @year_values.size}px",
+	xtitle: "Count", ytitle: "Year", round: 0,
+	discrete: true
+%>

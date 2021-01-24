@@ -3,10 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.0'
 
-# My stuff
-gem 'rspotify', '2.10.1'
-gem 'pry', '0.13.1'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.1'
 # Use sqlite3 as the database for Active Record
@@ -58,3 +54,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# My stuff (has to come _after_ rails gem for chartkick to work)
+gem 'rspotify', '2.10.1'
+gem 'pry', '0.13.1'
+gem 'chartkick', '3.4.2'

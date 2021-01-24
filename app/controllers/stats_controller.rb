@@ -34,7 +34,7 @@ class StatsController < ApplicationController
     offset = 0
     limit = 20
     all = []
-    while offset + limit < 60
+    while offset + limit < 1000
       tracks = @user.saved_tracks(offset: offset, limit: limit)
       break if tracks.empty? || tracks.size < limit
       all.concat(tracks)
