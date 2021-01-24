@@ -1,0 +1,18 @@
+<h1>Stats for <%= @user.uri %></h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Year</th>
+			<th>Count</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @by_year.each do |year, count| %>
+			<tr>
+				<td><%= year %></td>
+				<td><%= count %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
