@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Generate some Spotify stats from your playlists or saved songs!
 
-Things you may want to cover:
+# Publishing
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+docker build . -t <registry>/spotify-stats
+docker push <registry>/spotify-stats:latest --insecure-registry
+```
