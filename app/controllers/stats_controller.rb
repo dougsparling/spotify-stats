@@ -42,7 +42,7 @@ class StatsController < ApplicationController
     by_year = Hash.new(0)
     years = get_saved_tracks(pager).inject([]) do |memo, track|
       begin
-        memo << Date.parse(track.album.release_date).year
+        memo << Date.parse(track.album.release_date || "").year
       rescue Date::Error => e
         # do nothing
       end
