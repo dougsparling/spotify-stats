@@ -1,6 +1,7 @@
 <h1>Stats for <%= @name %></h1>
 
-<h3>My Saved Songs</h3>
+<h3>Track Count by Year of Release</h3>
+
 <%= bar_chart @year_labels.zip(@year_values),
 	id: "yearly-chart",
 	width: "800px", height: "#{100 + 18 * @year_values.size}px",
