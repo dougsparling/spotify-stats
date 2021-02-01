@@ -31,5 +31,5 @@ config.middleware.use OmniAuth::Builder do
   provider :developer unless Rails.env.production?
 
   # list of scopes: https://developer.spotify.com/documentation/general/guides/scopes/
-  provider :spotify, creds.spotify[:client_id], creds.spotify[:client_secret], scope: 'user-library-read'
+  provider :spotify, creds.spotify[:client_id], creds.spotify[:client_secret], scope: 'user-library-read playlist-read-private'
 end
