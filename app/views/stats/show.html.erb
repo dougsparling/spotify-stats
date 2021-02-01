@@ -1,9 +1,9 @@
-<h1>Stats for <%= @user.display_name %></h1>
+<h1>Hi, <%= @user.display_name %>!</h1>
 
-<h3>My Saved Songs</h3>
-<%= bar_chart @year_labels.zip(@year_values),
-	id: "yearly-chart",
-	width: "800px", height: "#{20 * @year_values.size}px",
-	xtitle: "Count", ytitle: "Year", round: 0,
-	discrete: true
-%>
+<p>Choose a playlist to analyze:</p>
+<ul>
+	<% for playlist in @playlists %>
+		<li><%= link_to playlist.name, action: 'show_playlist', id: playlist.id %></li>
+	<% end %>
+</ul>
+<p>Or analyze <%= link_to 'My Saved Tracks', action: 'show_saved_tracks' %></p>

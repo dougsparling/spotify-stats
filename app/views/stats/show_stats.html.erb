@@ -1,0 +1,11 @@
+<h1>Stats for <%= @name %></h1>
+
+<h3>My Saved Songs</h3>
+<%= bar_chart @year_labels.zip(@year_values),
+	id: "yearly-chart",
+	width: "800px", height: "#{100 + 18 * @year_values.size}px",
+	xtitle: "Count", ytitle: "Year", round: 0,
+	discrete: true
+%>
+
+<p><%= link_to '<< Back', action: 'show' %></p>
