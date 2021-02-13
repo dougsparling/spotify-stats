@@ -66,3 +66,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rspotify', '2.10.1'
 gem 'pry', '0.13.1'
 gem 'chartkick', '3.4.2'
+gem 'memoist'

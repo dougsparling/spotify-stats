@@ -2,9 +2,9 @@
 
 <h3>Track Count by Year of Release</h3>
 
-<%= bar_chart @year_labels.zip(@year_values),
+<%= bar_chart @analysis.release_date_range,
 	id: "yearly-chart",
-	width: "800px", height: "#{100 + 18 * @year_values.size}px",
+	width: "800px", height: "#{100 + 18 * @analysis.release_date_range.size}px",
 	xtitle: "Count", ytitle: "Year", round: 0,
 	discrete: true
 %>
