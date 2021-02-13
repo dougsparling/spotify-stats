@@ -51,6 +51,9 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+
+  # missing for some reason?
+  gem 'rexml'
 end
 
 group :production do
