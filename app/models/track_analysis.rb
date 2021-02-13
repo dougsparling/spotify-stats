@@ -16,7 +16,26 @@ class TrackAnalysis
     year_labels.zip(year_values)
   end
 
-  memoize :release_date_range
+  def danceability
+    score = @tracks.map(&:audio_features).map(&:danceability).sum / @tracks.size
+    label = case score
+      when 0..0.2     then "a funeral dirge"
+      when 0.2..0.35  then "elevator music"
+      when 0.35..0.45 then "clinic waiting room"
+      when 0.45..0.55 then "chain restaurant ambiance"
+      when 0.55..0.65 then "wedding music"  
+      when 0.65..0.8  then "the club"
+      when 0.8..1.0   then "a sick rave"
+      else                 "nothing really"
+    end
+    [label, score]
+  end
+
+  memoize :release_date_range, :danceability
+
+  def inspect
+    "TrackAnalysis{@tracks=#{@tracks.size}}"
+  end
 
   private
 
