@@ -31,7 +31,7 @@ class StatsController < ApplicationController
 
     @name = playlist.name
     @analysis = TrackAnalysis.new(tracks)
-    
+
     render :show_stats
   end
 
@@ -39,10 +39,12 @@ class StatsController < ApplicationController
 
   def get_saved_tracks(pager)
     offset = 0
-    limit = 20
+    limit = 50 # maximum per batch
     all = []
     while offset + limit < 1000
+      # RSpotify.raw_response = true
       tracks = pager.call(offset: offset, limit: limit)
+      # File.write('tracks.json', tracks)
       all.concat(tracks)
       break if tracks.empty? || tracks.size < limit
       offset += limit
