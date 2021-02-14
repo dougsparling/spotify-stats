@@ -26,13 +26,13 @@ class TrackAnalysisTest < ActiveSupport::TestCase
 
   test "valence" do
     label, score = @analysis.valence
-    assert_in_delta 0.55, score, 0.05
+    assert_in_delta 0.33, score, 0.05
     assert_equal "a moment of despair", label
   end
 
   test "highest_valence" do
     track = @analysis.highest_valence
-    assert_equal "wat", track.name
+    assert_equal "Sweet Dreams (Are Made of This) - Remastered", track.name
   end
 
   def tracks_fixture

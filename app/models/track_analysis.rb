@@ -5,6 +5,19 @@ class TrackAnalysis
 
   def initialize(tracks)
     @tracks = tracks
+
+    # audio_features are normally fetched lazily, but doing this for hundreds of tracks
+    # hits 429 errors pretty quick. So we fetch features in batches ahead of time.
+    @audio_features = {}
+    @tracks.map(&:id).each_slice(100) do |ids|
+      RSpotify::AudioFeatures.find(ids).zip(ids).each do |feature, track_id|
+        @audio_features[track_id] = feature unless feature.nil?
+      end
+    end
+  end
+
+  def track_count
+    @tracks.size
   end
 
   def release_date_range
@@ -63,11 +76,13 @@ class TrackAnalysis
 
   [:valence, :energy, :danceability].each do |attr|
     define_method "highest_#{attr}" do
-      @tracks.max_by { |t| t.audio_features.send(attr) }
+      track_id = @audio_features.max_by { |pair| pair[1].send(attr) }[0]
+      @tracks.find { |t| t.id == track_id }
     end
 
     define_method "lowest_#{attr}" do
-      @tracks.min_by { |t| t.audio_features.send(attr) }
+      track_id = @audio_features.min_by { |pair| pair[1].send(attr) }[0]
+      @tracks.find { |t| t.id == track_id }
     end
   end
 
@@ -78,7 +93,7 @@ class TrackAnalysis
   private
 
   def audio_features
-    @tracks.map(&:audio_features)
+    @audio_features.values
   end
 
   def counts_by_year
