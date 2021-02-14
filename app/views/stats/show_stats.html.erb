@@ -1,6 +1,21 @@
-<h1>Stats for <%= @name %></h1>
+<h1>Analysis of <i><%= @name %></i></h1>
 
-<p>💃💃💃 Danceability is comparable to <%= @analysis.danceability[0] %> (<%= (@analysis.danceability[1] * 100).to_i %>%) 💃💃💃
+<p>⚡⚡⚡ Energy like <%= @analysis.energy[0] %> (<%= (@analysis.danceability[1] * 100).to_i %>% energy) ⚡⚡⚡</p>
+
+<p>💃💃💃 Danceable as <%= @analysis.danceability[0] %> (<%= (@analysis.danceability[1] * 100).to_i %>% danceability) 💃💃💃</p>
+
+<p>😊😟😐 Feels like <%= @analysis.valence[0] %> (<%= (@analysis.valence[1] * 100).to_i %>% positivity) 😐😟😊</p>
+
+<h3>Standout Tracks</h3>
+
+<ul>
+	<li>Oozing with joy: <%= describe_track(@analysis.highest_valence) %></li>
+	<li>Sordid and depressing: <%= describe_track(@analysis.lowest_valence) %></li>
+	<li>Brimming with excitement: <%= describe_track(@analysis.highest_energy) %></li>
+	<li>Nap time: <%= describe_track(@analysis.lowest_energy) %></li>
+	<li>Boogie down with: <%= describe_track(@analysis.highest_danceability) %></li>
+	<li>Slowing things down: <%= describe_track(@analysis.lowest_danceability) %></li>
+</ul>
 
 <h3>Track Count by Year of Release</h3>
 

@@ -27,7 +27,7 @@ class StatsController < ApplicationController
 
   def show_playlist
     playlist = RSpotify::Playlist.find(@user.id, params[:id])
-    tracks = playlist.method(:tracks)
+    tracks = get_saved_tracks(playlist.method(:tracks))
 
     @name = playlist.name
     @analysis = TrackAnalysis.new(tracks)
@@ -39,10 +39,10 @@ class StatsController < ApplicationController
 
   def get_saved_tracks(pager)
     offset = 0
-    limit = 50 # maximum per batch
+    limit = 20 # maximum per batch
     all = []
-    while offset + limit < 1000
-      # RSpotify.raw_response = true
+    while offset + limit < ::MAX_TRACKS
+      RSpotify.raw_response = false
       tracks = pager.call(offset: offset, limit: limit)
       # File.write('tracks.json', tracks)
       all.concat(tracks)

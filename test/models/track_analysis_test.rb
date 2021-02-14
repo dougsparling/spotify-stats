@@ -18,6 +18,23 @@ class TrackAnalysisTest < ActiveSupport::TestCase
     assert_equal "chain restaurant ambiance", label
   end
 
+  test "energy" do
+    label, score = @analysis.energy
+    assert_in_delta 0.55, score, 0.05
+    assert_equal "a text from your crush", label
+  end
+
+  test "valence" do
+    label, score = @analysis.valence
+    assert_in_delta 0.55, score, 0.05
+    assert_equal "a moment of despair", label
+  end
+
+  test "highest_valence" do
+    track = @analysis.highest_valence
+    assert_equal "wat", track.name
+  end
+
   def tracks_fixture
     body = file_fixture("tracks-response.json").read
     json = JSON.parse(body)
