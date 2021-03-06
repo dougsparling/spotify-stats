@@ -2,12 +2,6 @@ class StatsController < ApplicationController
 
   before_action :authenticate, except: 'index'
 
-  def authenticate
-    user_hash = session[:user]
-    return redirect_to root_url unless user_hash
-    @user = RSpotify::User.new(user_hash)
-  end
-
   def index
     # landing page
   end
@@ -36,6 +30,12 @@ class StatsController < ApplicationController
   end
 
   private
+
+  def authenticate
+    user_hash = session[:user]
+    return redirect_to root_url unless user_hash
+    @user = RSpotify::User.new(user_hash)
+  end
 
   def get_saved_tracks(pager)
     offset = 0

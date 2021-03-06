@@ -34,9 +34,9 @@ class TrackAnalysis
     label = case score
       when 0..0.2     then "a funeral dirge"
       when 0.2..0.35  then "elevator music"
-      when 0.35..0.45 then "clinic waiting room"
+      when 0.35..0.45 then "a clinic waiting room"
       when 0.45..0.55 then "chain restaurant ambiance"
-      when 0.55..0.65 then "wedding music"  
+      when 0.55..0.65 then "a DJ's wedding set"  
       when 0.65..0.8  then "the club"
       when 0.8..1.0   then "a sick rave"
       else                 "nothing on earth"
