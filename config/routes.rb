@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   get '/stats', to: 'stats#show'
   get '/stats/saved', to: 'stats#show_saved_tracks'
   get '/stats/playlist/:id', to: 'stats#show_playlist'
+
+  get '/stats/saved/export', to: 'stats#export'
+  get '/stats/playlist/:id/export', to: 'stats#export'
 end

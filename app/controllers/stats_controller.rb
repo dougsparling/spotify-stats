@@ -1,3 +1,5 @@
+require 'csv'
+
 class StatsController < ApplicationController
 
   before_action :authenticate, except: 'index'
@@ -11,25 +13,59 @@ class StatsController < ApplicationController
   end
 
   def show_saved_tracks
-    tracks = get_saved_tracks(@user.method(:saved_tracks))
-
     @name = 'My Saved Tracks'
-    @analysis = TrackAnalysis.new(tracks)
+    @analysis = TrackAnalysis.new(get_tracks)
 
     render :show_stats
   end
 
   def show_playlist
     playlist = RSpotify::Playlist.find(@user.id, params[:id])
-    tracks = get_saved_tracks(playlist.method(:tracks))
 
     @name = playlist.name
-    @analysis = TrackAnalysis.new(tracks)
+    @analysis = TrackAnalysis.new(get_tracks(playlist))
 
     render :show_stats
   end
 
+  def export
+    playlist = RSpotify::Playlist.find(@user.id, params[:id]) if params.key?(:id)
+    tracks = get_tracks(playlist)
+
+    analysis = TrackAnalysis.new(tracks)
+
+    audio_features = [:key, :mode, :tempo, :time_signature, :liveness, :loudness, :speechiness, :acousticness, :danceability, :energy, :instrumentalness, :valence]
+
+    # TODO: time at which track was added might be interesting, but only applies to playlists, hmm...
+    csv = CSV.generate do |csv|
+      csv << ['track', 'album', 'artists', 'release date', 'popularity', *audio_features]
+      for track in tracks.sort_by(&:name)
+        track_features = analysis.track_features(track)
+        csv << [
+          track.name,
+          track.album.name,
+          track.album.artists.map(&:name).join(', '),
+          track.album.release_date,
+          track.popularity,
+          *audio_features.map { |f| track_features.send(f) }
+        ]
+      end
+    end
+
+    render inline: csv, content_type: 'text/csv'
+  end
+
   private
+
+  def get_tracks(playlist = nil)
+    pager = if playlist.nil?
+      @user.method(:saved_tracks)
+    else
+      playlist.method(:tracks)
+    end
+
+    return get_saved_tracks(pager)
+  end
 
   def authenticate
     user_hash = session[:user]

@@ -98,6 +98,10 @@ class TrackAnalysis
     end
   end
 
+  def track_features(track)
+    @audio_features[track.id] or raise "track not part of analysis: #{track.id}"
+  end
+
   def inspect
     "TrackAnalysis{@tracks=#{@tracks.size}}"
   end
