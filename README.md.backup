@@ -1,9 +1,0 @@
-# README
-
-Generate some Spotify stats from your playlists or saved songs!
-
-# Building
-
-```
-docker push 192.168.0.3:32000/gmbot:latest --insecure-registry
-```

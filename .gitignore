@@ -16,6 +16,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/README.md.backup
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
