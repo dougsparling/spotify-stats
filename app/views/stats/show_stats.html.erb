@@ -8,30 +8,32 @@
 
 <h3>Standout Tracks</h3>
 
-<ul>
-	<li>Oozing with joy: <%= describe_track(@analysis.highest_valence) %></li>
-	<li>Sordid and depressing: <%= describe_track(@analysis.lowest_valence) %></li>
-	<li>Brimming with excitement: <%= describe_track(@analysis.highest_energy) %></li>
-	<li>Nap time: <%= describe_track(@analysis.lowest_energy) %></li>
-	<li>Boogie down with: <%= describe_track(@analysis.highest_danceability) %></li>
-	<li>Slowing things down: <%= describe_track(@analysis.lowest_danceability) %></li>
-</ul>
+<div class="track-list">
+	<%= render partial: "track", locals: {track: @analysis.highest_valence, label: "oozing with joy"} %>
+	<%= render partial: "track", locals: {track: @analysis.lowest_valence, label: "sordid and depressing"} %>
 
-<h3>Normie Trash</h3>
+	<%= render partial: "track", locals: {track: @analysis.highest_energy, label: "brimming with excitement"} %>
+	<%= render partial: "track", locals: {track: @analysis.lowest_energy, label: "nap time"} %>
 
-<ul>
+	<%= render partial: "track", locals: {track: @analysis.highest_danceability, label: "boogie down with"} %>
+	<%= render partial: "track", locals: {track: @analysis.lowest_danceability, label: "slowing things down"} %>
+</div>
+
+<h3>Normie Trash (popular)</h3>
+
+<div class="track-list">
 	<% for track in @analysis.most_popular %>
-		<li><%= describe_track(track) %></li>
+		<%= render partial: "track", locals: {track: track} %>
 	<% end %>
-</ul>
+</div>
 
-<h3>Hipster Noise</h3>
+<h3>Hipster Noise (unpopular)</h3>
 
-<ul>
+<div class="track-list">
 	<% for track in @analysis.least_popular %>
-		<li><%= describe_track(track) %></li>
+		<%= render partial: "track", locals: {track: track} %>
 	<% end %>
-</ul>
+</div>
 
 <h3>Track Count by Year of Release</h3>
 

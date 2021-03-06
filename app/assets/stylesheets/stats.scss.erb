@@ -1,0 +1,63 @@
+// Place all the styles related to the stats controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+h3 {
+	font-size: xx-large;
+}
+
+.track-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.track-list > div {
+	margin-right: 25px;
+}
+
+.label {
+	font-size: x-large;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 5px;
+	font-style: italic;
+}
+
+.track {
+	width: 375px;
+	height: 297px;
+	background-image: url('<%= asset_path('jewel-case.jpg') %>');
+	background-size: 375px 297px;
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+.track img {
+	width: 280px;
+	height: 280px;
+	margin: 10px 0 0 65px;
+	filter: blur(1px);
+	opacity: 0.4;
+}
+
+.track p {
+	color: black;
+	text-shadow: 1px 1px 2px white;
+	padding-left: 45px;
+	font-size: x-large;
+	font-weight: bold;
+	text-align: center;
+	font-family: sans-serif;
+	font-family: 'marker';
+	width: 315px;
+}
+
+.track p.album {
+	position: absolute;
+	top: 15px;
+}
+
+.track p.name {
+	position: absolute;
+	bottom: 15px;
+}

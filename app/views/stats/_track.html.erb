@@ -1,0 +1,18 @@
+<div>
+	<% unless local_assigns[:label].nil? %>
+		<p class="label">⤹ <%= label %> ⤸</p>
+	<% end %>
+
+	<% medium_image = track.album.images.sort_by { |i| i['width'] }.second %>
+
+	<div class="track">
+		<%= image_tag medium_image['url'] %>
+
+		<% unless track.name.include?(track.album.name) %>
+			<p class="album"><%= track.album.name %></p>
+		<% end %>
+
+		<p class="name"><%= track.name %></p>
+	</div>
+
+</div>
