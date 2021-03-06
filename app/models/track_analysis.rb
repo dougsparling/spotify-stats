@@ -20,6 +20,10 @@ class TrackAnalysis
     @tracks.size
   end
 
+  def tracks_by_release_year(year)
+    @tracks.filter { |t| release_year(t) == year }
+  end
+
   def release_date_range
     by_year = counts_by_year
     oldest, newest = by_year.keys.minmax
@@ -74,6 +78,14 @@ class TrackAnalysis
     [label, score]
   end
 
+  def most_popular
+    @tracks.sort_by(&:popularity).reverse[0..2]
+  end
+
+  def least_popular
+    @tracks.sort_by(&:popularity)[0..2]
+  end
+
   [:valence, :energy, :danceability].each do |attr|
     define_method "highest_#{attr}" do
       track_id = @audio_features.max_by { |pair| pair[1].send(attr) }[0]
@@ -98,13 +110,17 @@ class TrackAnalysis
 
   def counts_by_year
     @tracks.inject(Hash.new(0)) do |memo, track|
-      begin
-        year = Date.parse(track.album.release_date || "").year
-        memo[year] += 1
-      rescue Date::Error => e
-        # ignore
-      end
+      year = release_year(track)
+      memo[year] += 1 unless year.nil?
       memo
+    end
+  end
+
+  def release_year(track)
+    begin
+      Date.parse(track.album.release_date || "").year
+    rescue Date::Error => e
+      nil
     end
   end
 

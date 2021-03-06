@@ -17,6 +17,22 @@
 	<li>Slowing things down: <%= describe_track(@analysis.lowest_danceability) %></li>
 </ul>
 
+<h3>Normie Trash</h3>
+
+<ul>
+	<% for track in @analysis.most_popular %>
+		<li><%= describe_track(track) %></li>
+	<% end %>
+</ul>
+
+<h3>Hipster Noise</h3>
+
+<ul>
+	<% for track in @analysis.least_popular %>
+		<li><%= describe_track(track) %></li>
+	<% end %>
+</ul>
+
 <h3>Track Count by Year of Release</h3>
 
 <%= bar_chart @analysis.release_date_range,
@@ -27,3 +43,4 @@
 %>
 
 <p><%= link_to '<< Back', action: 'show' %></p>
+

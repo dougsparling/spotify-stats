@@ -12,6 +12,11 @@ class TrackAnalysisTest < ActiveSupport::TestCase
     assert_equal [1971, 1], range.last
   end
 
+  test "tracks_by_release_year" do
+    tracks = @analysis.tracks_by_release_year(2020)
+    assert_equal ["Erase", "Heron", "Spongy Hammer", "Tropical Heaven"], tracks.map(&:name).sort
+  end
+
   test "danceability" do
     label, score = @analysis.danceability
     assert_in_delta 0.5, score, 0.05
@@ -33,6 +38,16 @@ class TrackAnalysisTest < ActiveSupport::TestCase
   test "highest_valence" do
     track = @analysis.highest_valence
     assert_equal "Sweet Dreams (Are Made of This) - Remastered", track.name
+  end
+
+  test "most_popular" do
+    tracks = @analysis.most_popular
+    assert_equal ["Seven Nation Army", "Sweet Dreams (Are Made of This) - Remastered", "Zombie"], tracks.map(&:name)
+  end
+
+  test "least_popular" do
+    tracks = @analysis.least_popular
+    assert_equal ["Heron", "Adagio For Strings - Radio Edit", "Heaven - 12\" Mix"], tracks.map(&:name)
   end
 
   def tracks_fixture
