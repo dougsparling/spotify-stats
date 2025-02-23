@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spotify-stats
-        image: spotify-stats:latest
+        image: localhost:32000/spotify-stats:latest
         ports:
         - containerPort: 3000
 ---

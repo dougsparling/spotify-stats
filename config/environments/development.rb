@@ -1,6 +1,6 @@
 require "active_support/core_ext/integer/time"
 
-MAX_TRACKS = 50
+MAX_TRACKS = 1000
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
