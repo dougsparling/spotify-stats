@@ -32,22 +32,16 @@ class StatsController < ApplicationController
     playlist = RSpotify::Playlist.find(@user.id, params[:id]) if params.key?(:id)
     tracks = get_tracks(playlist)
 
-    analysis = TrackAnalysis.new(tracks)
-
-    audio_features = [:key, :mode, :tempo, :time_signature, :liveness, :loudness, :speechiness, :acousticness, :danceability, :energy, :instrumentalness, :valence]
-
     # TODO: time at which track was added might be interesting, but only applies to playlists, hmm...
     csv = CSV.generate do |csv|
-      csv << ['track', 'album', 'artists', 'release date', 'popularity', *audio_features]
+      csv << ['track', 'album', 'artists', 'release date', 'popularity']
       for track in tracks.sort_by(&:name)
-        track_features = analysis.track_features(track)
         csv << [
           track.name,
           track.album.name,
           track.album.artists.map(&:name).join(', '),
           track.album.release_date,
-          track.popularity,
-          *audio_features.map { |f| track_features.send(f) }
+          track.popularity
         ]
       end
     end

@@ -1,24 +1,5 @@
 <h1>Analysis of <%= @analysis.track_count %> tracks in <i>'<%= @name %>'</i></h1>
 
-<p>⚡⚡⚡ Energy like <%= @analysis.energy[0] %> (<%= (@analysis.energy[1] * 100).to_i %>% energy) ⚡⚡⚡</p>
-
-<p>💃💃💃 Danceable as <%= @analysis.danceability[0] %> (<%= (@analysis.danceability[1] * 100).to_i %>% danceability) 💃💃💃</p>
-
-<p>😊😟😐 Feels like <%= @analysis.valence[0] %> (<%= (@analysis.valence[1] * 100).to_i %>% positivity) 😐😟😊</p>
-
-<h3>Standout Tracks</h3>
-
-<div class="track-list">
-	<%= render partial: "track", locals: {track: @analysis.highest_valence, label: "oozing with joy"} %>
-	<%= render partial: "track", locals: {track: @analysis.lowest_valence, label: "sordid and depressing"} %>
-
-	<%= render partial: "track", locals: {track: @analysis.highest_energy, label: "brimming with excitement"} %>
-	<%= render partial: "track", locals: {track: @analysis.lowest_energy, label: "nap time"} %>
-
-	<%= render partial: "track", locals: {track: @analysis.highest_danceability, label: "boogie down with"} %>
-	<%= render partial: "track", locals: {track: @analysis.lowest_danceability, label: "slowing things down"} %>
-</div>
-
 <h3>Normie Trash (popular)</h3>
 
 <div class="track-list">

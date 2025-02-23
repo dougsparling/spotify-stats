@@ -17,29 +17,6 @@ class TrackAnalysisTest < ActiveSupport::TestCase
     assert_equal ["Erase", "Heron", "Spongy Hammer", "Tropical Heaven"], tracks.map(&:name).sort
   end
 
-  test "danceability" do
-    label, score = @analysis.danceability
-    assert_in_delta 0.5, score, 0.05
-    assert_equal "chain restaurant ambiance", label
-  end
-
-  test "energy" do
-    label, score = @analysis.energy
-    assert_in_delta 0.55, score, 0.05
-    assert_equal "a text from your crush", label
-  end
-
-  test "valence" do
-    label, score = @analysis.valence
-    assert_in_delta 0.33, score, 0.05
-    assert_equal "a moment of despair", label
-  end
-
-  test "highest_valence" do
-    track = @analysis.highest_valence
-    assert_equal "Sweet Dreams (Are Made of This) - Remastered", track.name
-  end
-
   test "most_popular" do
     tracks = @analysis.most_popular
     assert_equal ["Seven Nation Army", "Sweet Dreams (Are Made of This) - Remastered", "Zombie"], tracks.map(&:name)
